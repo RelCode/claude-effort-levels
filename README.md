@@ -1,1 +1,1 @@
-"# Claude Effort Levels" 
+# Claude Effort Levels
