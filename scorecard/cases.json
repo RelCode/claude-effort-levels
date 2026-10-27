@@ -1,0 +1,289 @@
+{
+  "note": "Ground truth for the SA ID validator demo. Generated once and then frozen; do not show to any id-validator-* run.",
+  "cases": [
+    {
+      "id": "C01",
+      "input": "8503125601083",
+      "desc": "male citizen, 1980s",
+      "expected": {
+        "valid": true,
+        "dateOfBirth": "1985-03-12",
+        "gender": "male",
+        "citizenship": "citizen"
+      }
+    },
+    {
+      "id": "C02",
+      "input": "9307150123081",
+      "desc": "female citizen",
+      "expected": {
+        "valid": true,
+        "dateOfBirth": "1993-07-15",
+        "gender": "female",
+        "citizenship": "citizen"
+      }
+    },
+    {
+      "id": "C03",
+      "input": "7512314999183",
+      "desc": "gender boundary 4999 is female; permanent resident",
+      "expected": {
+        "valid": true,
+        "dateOfBirth": "1975-12-31",
+        "gender": "female",
+        "citizenship": "permanent_resident"
+      }
+    },
+    {
+      "id": "C04",
+      "input": "0203045000080",
+      "desc": "gender boundary 5000 is male; born in the 2000s",
+      "expected": {
+        "valid": true,
+        "dateOfBirth": "2002-03-04",
+        "gender": "male",
+        "citizenship": "citizen"
+      }
+    },
+    {
+      "id": "C05",
+      "input": "0002295123083",
+      "desc": "leap day in 2000 (century rule picks 2000, which is a leap year)",
+      "expected": {
+        "valid": true,
+        "dateOfBirth": "2000-02-29",
+        "gender": "male",
+        "citizenship": "citizen"
+      }
+    },
+    {
+      "id": "C06",
+      "input": "8802290456087",
+      "desc": "leap day in 1988",
+      "expected": {
+        "valid": true,
+        "dateOfBirth": "1988-02-29",
+        "gender": "female",
+        "citizenship": "citizen"
+      }
+    },
+    {
+      "id": "C07",
+      "input": "6509207788286",
+      "desc": "refugee (citizenship digit 2)",
+      "expected": {
+        "valid": true,
+        "dateOfBirth": "1965-09-20",
+        "gender": "male",
+        "citizenship": "refugee"
+      }
+    },
+    {
+      "id": "C08",
+      "input": "9912310000085",
+      "desc": "sequence 0000, last day of 1999",
+      "expected": {
+        "valid": true,
+        "dateOfBirth": "1999-12-31",
+        "gender": "female",
+        "citizenship": "citizen"
+      }
+    },
+    {
+      "id": "C09",
+      "input": "1006309999197",
+      "desc": "A digit 9 is accepted; sequence 9999",
+      "expected": {
+        "valid": true,
+        "dateOfBirth": "2010-06-30",
+        "gender": "male",
+        "citizenship": "permanent_resident"
+      }
+    },
+    {
+      "id": "C10",
+      "input": "4508173210087",
+      "desc": "YY=45 resolves to 1945, not 2045",
+      "expected": {
+        "valid": true,
+        "dateOfBirth": "1945-08-17",
+        "gender": "female",
+        "citizenship": "citizen"
+      }
+    },
+    {
+      "id": "C11",
+      "input": "2511156003083",
+      "desc": "recent birth resolves to 2025, not 1925",
+      "expected": {
+        "valid": true,
+        "dateOfBirth": "2025-11-15",
+        "gender": "male",
+        "citizenship": "citizen"
+      }
+    },
+    {
+      "id": "C12",
+      "input": "7104056543005",
+      "desc": "A digit 0 is accepted (A is not validated)",
+      "expected": {
+        "valid": true,
+        "dateOfBirth": "1971-04-05",
+        "gender": "male",
+        "citizenship": "citizen"
+      }
+    },
+    {
+      "id": "C13",
+      "input": "8503125601086",
+      "desc": "check digit wrong",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C14",
+      "input": "0002295123086",
+      "desc": "check digit wrong on a leap-day ID",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C15",
+      "input": "850312560108",
+      "desc": "12 digits",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C16",
+      "input": "85031256010830",
+      "desc": "14 digits",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C17",
+      "input": "",
+      "desc": "empty string",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C18",
+      "input": "85O3125601083",
+      "desc": "contains a letter O instead of zero",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C19",
+      "input": "850312 5601 083",
+      "desc": "spaces between groups",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C20",
+      "input": "850312-5601-083",
+      "desc": "dashes between groups",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C21",
+      "input": " 8503125601083 ",
+      "desc": "leading and trailing whitespace",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C22",
+      "input": "8513125601082",
+      "desc": "month 13 (Luhn passes)",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C23",
+      "input": "8500125601089",
+      "desc": "month 00 (Luhn passes)",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C24",
+      "input": "8501325601085",
+      "desc": "day 32 (Luhn passes)",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C25",
+      "input": "8503005601088",
+      "desc": "day 00 (Luhn passes)",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C26",
+      "input": "8504315601081",
+      "desc": "31 April (Luhn passes)",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C27",
+      "input": "9202305601083",
+      "desc": "30 February (Luhn passes)",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C28",
+      "input": "9902295601080",
+      "desc": "29 February 1999, not a leap year (Luhn passes)",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C29",
+      "input": "8503125601380",
+      "desc": "citizenship digit 3 (Luhn passes)",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C30",
+      "input": "8503125601984",
+      "desc": "citizenship digit 9 (Luhn passes)",
+      "expected": {
+        "valid": false
+      }
+    },
+    {
+      "id": "C31",
+      "input": "0000000000000",
+      "desc": "all zeros: passes Luhn, but the date is invalid",
+      "expected": {
+        "valid": false
+      }
+    }
+  ]
+}

@@ -13,3 +13,5 @@ All these will be done inside the Claude app so that we can see the time taken f
 Basic plan - which will be refined as we go along
 
 The punchline on this will be that there's a lot of generic advise on this which does not make sense for all cases...
+
+Important - effort dial controls reasoning budget - it basically answers (how much time and token can I spend on you running various checks in the background before the answer gets generated) - and what this means is that poor context is poor context - no matter which effort you chose. Things that requires public or general knowledge or even knowledge that was available for training won't be affected that much due to your effort level - but internal work
